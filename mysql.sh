@@ -10,7 +10,6 @@ pw_mysql={password}
 echo "load data local infile '"$folder"' into table $2 fields terminated by '|' lines terminated by '\n'" | 
 mysql --local-infile=1 -h$ip_mysql -u$us_mysql -p$pw_mysql dsp_new
 
-
 ### untuk export data dari DB mysql ke csv 
 
 com="SELECT * FROM $1
@@ -19,7 +18,6 @@ period = '20230202' AND `payload` > 10240"
 
 mysql -u $us_mysqs -p$ip_mysql -h $mus_ysql dsp_new -e "$com" | sed 's/\t/","/g;s/^/"/;s/$/"/;s/\n//g' > $folder/$2.csv
 echo $com
-
 
 
 ### looping dengan file .txt teks
