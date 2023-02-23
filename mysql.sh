@@ -45,9 +45,9 @@ echo $com
 
 ### looping dengan file .txt teks
 
-ip_mysql=10.73.98.115
-us_mysql=chalista
-pw_mysql=chalista2005
+ip_mysql={ip_host}
+us_mysql={username}
+pw_mysql={password}
 
 name=$(cat table.txt | awk -v a=$1 -v b=$2 'NR==a,NR==b')
 folder=/home/dsp_new/xpt/
