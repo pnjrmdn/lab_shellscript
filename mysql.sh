@@ -1,5 +1,28 @@
 #!/usr/bin/bash
 
+### untuk dump DB mysql .sql
+folder_dump=/home/dbbackup222/
+var=$1
+
+mysqldump --verbose --lock-tables=false \
+--max-allowed-packet=512M --quick --force -P 3306 -h 10.73.173.222 -u chalista \
+-pchalista2005 $var 2> "$folder_dump"log_"$var"$2.txt > "$folder_dump"$var.sql
+
+### untuk import DB mysql .sql
+name=$(cat table.txt | awk -v a=$1 -v b=$2 'NR==a,NR==b')
+folder=/home/dbbackup222/hadoop/log/
+folder_dump=/home/dbbackup222/hadoop/
+
+echo $1 " " $2 >> log_number_import.txt
+
+for var in $name
+do
+mysql -u chalista -pchalista2005 hadoop < $var.sql
+echo $var >> log_import.txt
+done
+
+###------------------------------------------------------------------------------------------------------------------------------
+
 ### untuk load data dari csv ke DB mysql
 folder="/home/dsp_new/"$1
 
