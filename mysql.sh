@@ -25,7 +25,7 @@ echo $1 " " $2 >> log_number_import.txt
 
 for var in $name
 do
-mysql -u {username} -p{password} hadoop < $var.sql
+mysql -u {username} -p{password} {database}< $var.sql
 echo $var >> log_import.txt
 done
 
