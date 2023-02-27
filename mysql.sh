@@ -1,12 +1,23 @@
 #!/usr/bin/bash
 
+name=$(cat table.txt | awk -v a=$1 -v b=$2 'NR==a,NR==b')
+folder_dump=/home/server98.115/database/_new
 
+echo $1 " " $2 >> log_dump.txt
+
+for var in $name
+do
+mysqldump --verbose --lock-tables=false \
+--max-allowed-packet=512M --quick --force -P 3306 -h {ip_host} -u chalista \
+-pchalista2005 _new $var 2> "$folder_dump"log_$var.txt > "$folder_dump"$var.sql
+echo $var
+done
 
 ###------------------------------------------------------------------------------------------------------------------------------
 ### untuk dump DB mysql .sql
 
 name=$(cat table.txt | awk -v a=$1 -v b=$2 'NR==a,NR==b')
-folder_dump=/home/dir/database/dsp_new
+folder_dump=/home/dir/database
 
 echo $1 " " $2 >> log_dump.txt
 
@@ -51,14 +62,14 @@ done
 ###------------------------------------------------------------------------------------------------------------------------------
 
 ### untuk load data dari csv ke DB mysql
-folder="/home/dsp_new/"$1
+folder="/home/"$1
 
 ip_mysql={ip_host}
 us_mysql={username}
 pw_mysql={password}
 
 echo "load data local infile '"$folder"' into table $2 fields terminated by '|' lines terminated by '\n'" | 
-mysql --local-infile=1 -h$ip_mysql -u$us_mysql -p$pw_mysql dsp_new
+mysql --local-infile=1 -h$ip_mysql -u$us_mysql -p$pw_mysql {database}
 
 ### untuk export data dari DB mysql ke csv 
 
@@ -66,7 +77,7 @@ com="SELECT * FROM $1
 WHERE rat IN ('2G', '3G') AND
 period = '20230202' AND `payload` > 10240"
 
-mysql -u $us_mysqs -p$ip_mysql -h $mus_ysql dsp_new -e "$com" | sed 's/\t/","/g;s/^/"/;s/$/"/;s/\n//g' > $folder/$2.csv
+mysql -u $us_mysqs -p$ip_mysql -h $us_ysql {database} -e "$com" | sed 's/\t/","/g;s/^/"/;s/$/"/;s/\n//g' > $folder/$2.csv
 echo $com
 
 
@@ -77,7 +88,7 @@ us_mysql={username}
 pw_mysql={password}
 
 name=$(cat table.txt | awk -v a=$1 -v b=$2 'NR==a,NR==b')
-folder=/home/dsp_new/xpt/
+folder=/home/dir/
 
 echo $1 " " $2 >> log_dump.txt
 
