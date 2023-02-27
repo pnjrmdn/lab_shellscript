@@ -1,9 +1,10 @@
 #!/usr/bin/bash
 
+###------------------------------------------------------------------------------------------------------------------------------
 ### untuk dump DB mysql .sql
 
 name=$(cat table.txt | awk -v a=$1 -v b=$2 'NR==a,NR==b')
-folder_dump=/home/asdf/database/dsp_new
+folder_dump=/home/server98.115/database/dsp_new
 
 echo $1 " " $2 >> log_dump.txt
 
