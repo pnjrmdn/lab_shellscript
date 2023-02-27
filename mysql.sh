@@ -18,6 +18,17 @@ mysqldump --verbose --lock-tables=false \
 echo $var
 done
 
+### untuk import DB mysql .sql
+name=$(cat table.txt | awk -v a=$1 -v b=$2 'NR==a,NR==b')
+
+echo $1 " " $2 >> log_number_import.txt
+
+for var in $name
+do
+mysql -u {username} -p{password} hadoop < $var.sql
+echo $var >> log_import.txt
+done
+
 ### untuk dump --- Table DB mysql .sql
 folder_dump=/home/dbbackup222/
 var=$1
