@@ -26,7 +26,7 @@ mysqldump --verbose --lock-tables=false \
 
 ### untuk import DB mysql .sql
 ##remote
-mysql -u vmborneo -h {ip_host} -p{password} -f -D area < area.sql
+mysql -u {username} -h {ip_host} -p{password} -f -D area < area.sql
 
 ###local
 var=$1
