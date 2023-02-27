@@ -1,17 +1,6 @@
 #!/usr/bin/bash
 
-name=$(cat table.txt | awk -v a=$1 -v b=$2 'NR==a,NR==b')
-folder_dump=/home/server98.115/database/_new
 
-echo $1 " " $2 >> log_dump.txt
-
-for var in $name
-do
-mysqldump --verbose --lock-tables=false \
---max-allowed-packet=512M --quick --force -P 3306 -h {ip_host} -u chalista \
--pchalista2005 _new $var 2> "$folder_dump"log_$var.txt > "$folder_dump"$var.sql
-echo $var
-done
 
 ###------------------------------------------------------------------------------------------------------------------------------
 ### untuk dump DB mysql .sql
@@ -24,7 +13,7 @@ echo $1 " " $2 >> log_dump.txt
 for var in $name
 do
 mysqldump --verbose --lock-tables=false \
---max-allowed-packet=512M --quick --force -P 3306 -h {ip_host} -u chalista \
+--max-allowed-packet=512M --quick --force -P 3306 -h {ip_host} -u {username} \
 -p{password} {database} $var 2> "$folder_dump"log_$var.txt > "$folder_dump"$var.sql
 echo $var
 done
