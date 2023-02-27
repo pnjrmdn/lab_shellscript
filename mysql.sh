@@ -8,7 +8,24 @@ mysqldump --verbose --lock-tables=false \
 --max-allowed-packet=512M --quick --force -P 3306 -h {ip_host} -u {username} \
 -p{password} $var 2> "$folder_dump"log_"$var"$2.txt > "$folder_dump"$var.sql
 
+### untuk dump --- Table DB mysql .sql
+folder_dump=/home/dbbackup222/
+var=$1
+
+mysqldump --verbose --lock-tables=false \
+--max-allowed-packet=512M --quick --force -P 3306 -h {ip_host} -u {username} \
+-p{password} $var 2> "$folder_dump"log_"$var"$2.txt > "$folder_dump"$var.sql
+
+
 ### untuk import DB mysql .sql
+##remote
+mysql -u vmborneo -h {ip_host} -p{password} -f -D area < area.sql
+
+###local
+var=$1
+mysql -u chalista -pchalista2005 $var < $var.sql
+
+##looping
 name=$(cat table.txt | awk -v a=$1 -v b=$2 'NR==a,NR==b')
 folder=/home/dbbackup222/hadoop/log/
 folder_dump=/home/dbbackup222/hadoop/
@@ -58,3 +75,16 @@ for var in $name
 do
 // put code here
 done
+
+###------------------------------------------------------------------------------------------------------------------------------
+
+### resync database 1 dgn database 2
+
+expect << eof
+ set timeout 1200
+ spawn rsync -avz -e ssh root@{ip_server}:/var/lib/mysql/hadoop /var/lib/mysql
+ expect "*password*"
+ send "{password}\n"
+ expect "*#*"
+ send "exit\n"
+eof
