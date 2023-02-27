@@ -1,12 +1,19 @@
 #!/usr/bin/bash
 
 ### untuk dump DB mysql .sql
-folder_dump=/home/dbbackup222/
-var=$1
 
+name=$(cat table.txt | awk -v a=$1 -v b=$2 'NR==a,NR==b')
+folder_dump=/home/server98.115/database/dsp_new
+
+echo $1 " " $2 >> log_dump.txt
+
+for var in $name
+do
 mysqldump --verbose --lock-tables=false \
---max-allowed-packet=512M --quick --force -P 3306 -h {ip_host} -u {username} \
--p{password} $var 2> "$folder_dump"log_"$var"$2.txt > "$folder_dump"$var.sql
+--max-allowed-packet=512M --quick --force -P 3306 -h {ip_host} -u chalista \
+-p{password} {database} $var 2> "$folder_dump"log_$var.txt > "$folder_dump"$var.sql
+echo $var
+done
 
 ### untuk dump --- Table DB mysql .sql
 folder_dump=/home/dbbackup222/
