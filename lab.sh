@@ -1,6 +1,18 @@
 #!/usr/bin/bash
 
 ###------------------------------------------------------------------------------------------------------------------------------
+### nginx hosting web with fpm different
+    location /cactiIT/ {
+        alias /home/itkal/cacti/;
+        index index.php;
+        location ~ \.php$ {
+            include snippets/fastcgi-php.conf;
+            fastcgi_param SCRIPT_FILENAME $request_filename;
+            fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+        }
+    }
+
+###------------------------------------------------------------------------------------------------------------------------------
 #send file server to server 
 scp /home/panji/dbbackup/{file.sql} {username_ssh}@{ip_host}:/home/panji/dbbackup
 
