@@ -2,8 +2,8 @@
 
 ###------------------------------------------------------------------------------------------------------------------------------
 ### nginx hosting web with fpm different
-    location /cactiIT/ {
-        alias /home/itkal/cacti/;
+    location /app/ {
+        alias /home/dir/app/;
         index index.php;
         location ~ \.php$ {
             include snippets/fastcgi-php.conf;
@@ -14,7 +14,7 @@
 
 ###------------------------------------------------------------------------------------------------------------------------------
 #send file server to server 
-scp /home/panji/dbbackup/{file.sql} {username_ssh}@{ip_host}:/home/panji/dbbackup
+scp /home/dir/db_backup/{file.sql} {username_ssh}@{ip_host}:/home/dir/db_backup
 
 ###------------------------------------------------------------------------------------------------------------------------------
 ### untuk dump DB mysql .sql
@@ -44,7 +44,7 @@ echo $var >> log_import.txt
 done
 
 ### untuk dump --- Table DB mysql .sql
-folder_dump=/home/dbbackup222/
+folder_dump=/home/db_backup/
 var=$1
 
 mysqldump --verbose --lock-tables=false \
@@ -62,8 +62,8 @@ mysql -u chalista -pchalista2005 $var < $var.sql
 
 ##looping
 name=$(cat table.txt | awk -v a=$1 -v b=$2 'NR==a,NR==b')
-folder=/home/dbbackup222/hadoop/log/
-folder_dump=/home/dbbackup222/hadoop/
+folder=/home/db_backup/hadoop/log/
+folder_dump=/home/db_backup/hadoop/
 
 echo $1 " " $2 >> log_number_import.txt
 
