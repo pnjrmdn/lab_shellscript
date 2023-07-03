@@ -58,7 +58,7 @@ mysql -u {username} -h {ip_host} -p{password} -f -D db_name < db_name.sql
 
 ###local
 var=$1
-mysql -u username -p $var < $var.sql
+mysql -u {username} -p $var < $var.sql
 
 ##looping
 name=$(cat table.txt | awk -v a=$1 -v b=$2 'NR==a,NR==b')
