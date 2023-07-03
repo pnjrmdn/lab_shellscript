@@ -54,7 +54,7 @@ mysqldump --verbose --lock-tables=false \
 
 ### untuk import DB mysql .sql
 ##remote
-mysql -u {username} -h {ip_host} -p{password} -f -D area < area.sql
+mysql -u {username} -h {ip_host} -p{password} -f -D db_name < db_name.sql
 
 ###local
 var=$1
@@ -62,14 +62,14 @@ mysql -u chalista -pchalista2005 $var < $var.sql
 
 ##looping
 name=$(cat table.txt | awk -v a=$1 -v b=$2 'NR==a,NR==b')
-folder=/home/db_backup/hadoop/log/
-folder_dump=/home/db_backup/hadoop/
+folder=/home/db_backup/name_db/log/
+folder_dump=/home/db_backup/name_db/
 
 echo $1 " " $2 >> log_number_import.txt
 
 for var in $name
 do
-mysql -u {username} -p{password}d hadoop < $var.sql
+mysql -u {username} -p{password}d name_db < $var.sql
 echo $var >> log_import.txt
 done
 
@@ -117,7 +117,7 @@ done
 
 expect << eof
  set timeout 1200
- spawn rsync -avz -e ssh root@{ip_server}:/var/lib/mysql/hadoop /var/lib/mysql
+ spawn rsync -avz -e ssh root@{ip_server}:/var/lib/mysql/name_db /var/lib/mysql
  expect "*password*"
  send "{password}\n"
  expect "*#*"
