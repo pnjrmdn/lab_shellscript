@@ -1,0 +1,1 @@
+mkdir /home/test_jenkins
