@@ -1,1 +1,1 @@
-mkdir /home/test_jenkins
+mkdir /home/test_jenkins_update
