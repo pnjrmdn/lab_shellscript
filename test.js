@@ -1,14 +1,23 @@
-What does asyncio.gather() do?
+Skip to Content
+My Home
+Syllabus
+Get Unstuck
+
+Avatar
+Quiz: Line Graphs Concepts
+What are the inputs to the plt.plot function, in order?
 
 
-asyncio.gather() groups asynchronous tasks together and allows them to be run concurrently.
+x values (list of numbers), y values (list of numbers)
 
 
-asyncio.gather() creates a coroutine function.
+y values (list of numbers), x values (list of numbers)
 
 
-asyncio.gather() creates multiple threads.
+x value (number), y value (number)
 
 
-asyncio.gather() creates multiple processes.
+x values (list of numbers), scale of axes
 
+2 / 15
+Progress: 6%
