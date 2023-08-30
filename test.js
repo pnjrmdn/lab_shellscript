@@ -19,5 +19,3 @@ x value (number), y value (number)
 
 x values (list of numbers), scale of axes
 
-2 / 15
-Progress: 6%
